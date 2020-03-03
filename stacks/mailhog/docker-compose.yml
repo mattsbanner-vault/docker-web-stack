@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog:latest
+    restart: always
+    networks:
+      - mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+
+networks:
+
+  mailhog:
+    name: mailhog
+    driver: bridge
