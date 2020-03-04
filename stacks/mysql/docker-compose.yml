@@ -18,22 +18,6 @@ services:
     volumes:
       - ${VOLUME_PATH}/mysql/:/var/lib/mysql/
 
-  mysql_secondary:
-    container_name: mysql_secondary
-    image: mysql:5.7
-    restart: always
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_DATABASE=example
-    networks:
-      - mysql
-    ports:
-      - 3307:3306
-    volumes:
-      - ${VOLUME_PATH}/mysql_secondary/:/var/lib/mysql/
-
   phpmyadmin:
     container_name: phpmyadmin
     image: phpmyadmin/phpmyadmin:5.0.1
