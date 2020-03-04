@@ -7,7 +7,12 @@ services:
     image: nginx:stable
     restart: unless-stopped
     depends_on:
+      - php56
+      - php70
+      - php71
+      - php72
       - php73
+      - php74
     networks:
       - nginx
       - php
@@ -24,8 +29,7 @@ services:
       - php
     volumes:
       #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-      - ${VOLUME_PATH}/sites/:/usr/share/nginx
-      - ./stacks/web/configs/nginx/:/usr/share/nginx
+      - ${VOLUME_PATH}/sites/:/web
 
   php70:
     container_name: php-7.0
@@ -35,8 +39,7 @@ services:
       - php
     volumes:
       #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-      - ${VOLUME_PATH}/sites/:/usr/share/nginx
-      - ./stacks/web/configs/nginx/:/usr/share/nginx
+      - ${VOLUME_PATH}/sites/:/web
 
   php71:
     container_name: php-7.1
@@ -46,7 +49,7 @@ services:
       - php
     volumes:
       #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-      - ${VOLUME_PATH}/sites/:/usr/share/nginx
+      - ${VOLUME_PATH}/sites/:/web
 
   php72:
     container_name: php-7.2
@@ -56,7 +59,7 @@ services:
       - php
     volumes:
       #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-      - ${VOLUME_PATH}/sites/:/usr/share/nginx
+      - ${VOLUME_PATH}/sites/:/web
 
   php73:
     container_name: php-7.3
@@ -66,7 +69,7 @@ services:
       - php
     volumes:
       #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-      - ${VOLUME_PATH}/sites/:/usr/share/nginx
+      - ${VOLUME_PATH}/sites/:/web
 
   php74:
     container_name: php-7.4
@@ -76,7 +79,7 @@ services:
       - php
     volumes:
       #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-      - ${VOLUME_PATH}/sites/:/usr/share/nginx
+      - ${VOLUME_PATH}/sites/:/web
 
 networks:
 
