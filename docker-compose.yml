@@ -1,0 +1,218 @@
+version: '3.5'
+
+services:
+
+  nginx:
+    container_name: nginx
+    image: nginx:stable
+    restart: unless-stopped
+    depends_on:
+      - php56
+      - php70
+      - php71
+      - php72
+      - php73
+      - php74
+    networks:
+      - nginx
+      - php
+    ports:
+      - 8080:80
+    volumes:
+      - ${VOLUME_PATH}/sites/:/usr/share/nginx
+
+  php56:
+    container_name: php-5.6
+    image: nanoninja/php-fpm:5.6
+    restart: unless-stopped
+    networks:
+      - php
+    volumes:
+      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+      - ${VOLUME_PATH}/sites/:/web
+
+  php70:
+    container_name: php-7.0
+    image: nanoninja/php-fpm:7.0
+    restart: unless-stopped
+    networks:
+      - php
+    volumes:
+      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+      - ${VOLUME_PATH}/sites/:/web
+
+  php71:
+    container_name: php-7.1
+    image: nanoninja/php-fpm:7.1
+    restart: unless-stopped
+    networks:
+      - php
+    volumes:
+      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+      - ${VOLUME_PATH}/sites/:/web
+
+  php72:
+    container_name: php-7.2
+    image: nanoninja/php-fpm:7.2
+    restart: unless-stopped
+    networks:
+      - php
+    volumes:
+      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+      - ${VOLUME_PATH}/sites/:/web
+
+  php73:
+    container_name: php-7.3
+    image: nanoninja/php-fpm:7.3
+    restart: unless-stopped
+    networks:
+      - php
+    volumes:
+      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+      - ${VOLUME_PATH}/sites/:/web
+
+  php74:
+    container_name: php-7.4
+    image: nanoninja/php-fpm:7.4
+    restart: unless-stopped
+    networks:
+      - php
+    volumes:
+      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+      - ${VOLUME_PATH}/sites/:/web
+
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog:latest
+    restart: always
+    networks:
+      - mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+
+  mongo:
+    image: mongo:4.2
+    container_name: mongo
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+    networks:
+      - mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ${VOLUME_PATH}/mongo/:/data/db
+
+  mongo-express:
+    image: mongo-express:0.54
+    container_name: mongo_express
+    restart: unless-stopped
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_USER}
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${MONGO_PASSWORD}
+    links:
+      - mongo
+    depends_on:
+      - mongo
+    networks:
+      - mongo
+    ports:
+      - 8083:8081
+
+  mysql:
+    container_name: mysql
+    image: mysql:${MYSQL_VERSION}
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=example
+    networks:
+      - mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - ${VOLUME_PATH}/mysql/:/var/lib/mysql/
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin:5.0.1
+    restart: always
+    networks:
+      - mysql
+    depends_on:
+      - mysql
+    external_links:
+      - mysql:db
+    ports:
+      - '8082:80'
+
+  redis:
+    container_name: redis
+    image: bitnami/redis:5.0.6
+    restart: always
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    networks:
+      - redis
+    ports:
+      - 6379:6379
+    volumes:
+      - ${VOLUME_PATH}/redis/:/data
+
+  commander:
+    container_name: redis_commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    networks:
+      - redis
+    ports:
+      - 8081:8081
+
+  portainer:
+    container_name: portainer
+    image: portainer/portainer:latest
+    restart: always
+    networks:
+      - portainer
+    ports:
+      - 9000:9000
+    volumes:
+      - ${VOLUME_PATH}/portainer/:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+
+networks:
+
+  nginx:
+    name: nginx
+    driver: bridge
+
+  php:
+    name: php
+    driver: bridge
+
+  mailhog:
+    name: mailhog
+    driver: bridge
+
+  mongo:
+    name: mongo
+    driver: bridge
+
+  mysql:
+    name: mysql
+    driver: bridge
+
+  portainer:
+    name: portainer
+    driver: bridge
+
+  redis:
+    name: redis
+    driver: bridge
