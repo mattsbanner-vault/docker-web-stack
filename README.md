@@ -13,19 +13,18 @@ Here you can see what I'm working on.
 ## Ideas
 Ideally, the user should only have to add the wildcard of `*.dev.localhost` to their hosts file. The stack can then be used with the following.
 
-Redis Commander - http://redis-commander.stack.dev.localhost
-PHPMyAdmin - http://phpmyadmin.stack.dev.localhost
-Mongo Express - http://mongo-express.stack.dev.localhost
-Mailhog - http://mailhog.stack.dev.localhost
-Mailhog - http://portainer.stack.dev.localhost
+- Redis Commander - http://redis-commander.stack.dev.localhost
+- PHPMyAdmin - http://phpmyadmin.stack.dev.localhost
+- Mongo Express - http://mongo-express.stack.dev.localhost
+- Mailhog - http://mailhog.stack.dev.localhost
+- Portainer - http://portainer.stack.dev.localhost
 
-Default PHP sites can then be accessed with 
-http://site-folder-name.dev.localhost
+Default PHP sites can then be accessed with http://site-folder-name.dev.localhost
 
-Specific PHP sites can then be targetted with
-http://site-folder-name.php56.dev.localhost
-http://site-folder-name.php70.dev.localhost
-http://site-folder-name.php71.dev.localhost
-http://site-folder-name.php72.dev.localhost
-http://site-folder-name.php73.dev.localhost
-http://site-folder-name.php74.dev.localhost
+Specific PHP sites can be targetted with
+- http://site-folder-name.php56.dev.localhost
+- http://site-folder-name.php70.dev.localhost
+- http://site-folder-name.php71.dev.localhost
+- http://site-folder-name.php72.dev.localhost
+- http://site-folder-name.php73.dev.localhost
+- http://site-folder-name.php74.dev.localhost
