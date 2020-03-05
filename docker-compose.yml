@@ -93,7 +93,7 @@ services:
      - web
    ports:
      - 1025:1025
-     - 8025:8025
+#     - 8025:8025
 
   mongo:
     image: mongo:4.2
@@ -122,8 +122,8 @@ services:
       - mongo
     networks:
       - web
-    ports:
-      - 8083:8081
+#    ports:
+#      - 8083:8081
 
   # mysql:
   #   container_name: mysql
@@ -201,20 +201,4 @@ networks:
 
   php:
     name: php
-    driver: bridge
-
-  mongo:
-    name: mongo
-    driver: bridge
-
-  mysql:
-    name: mysql
-    driver: bridge
-
-  portainer:
-    name: portainer
-    driver: bridge
-
-  redis:
-    name: redis
     driver: bridge
