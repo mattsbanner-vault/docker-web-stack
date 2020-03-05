@@ -15,6 +15,7 @@ services:
       # - php74
       - mongo-express
       - mailhog
+      - redis-commander
     networks:
       - web
       - php
@@ -153,30 +154,32 @@ services:
   #   ports:
   #     - '8082:80'
 
-  # redis:
-  #   container_name: redis
-  #   image: bitnami/redis:5.0.6
-  #   restart: always
-  #   environment:
-  #     - REDIS_PASSWORD=${REDIS_PASSWORD}
-  #   networks:
-  #     - redis
-  #   ports:
-  #     - 6379:6379
-  #   volumes:
-  #     - ${VOLUME_PATH}/redis/:/data
+  redis:
+   container_name: redis
+   image: bitnami/redis:5.0.6
+   restart: always
+   environment:
+     - REDIS_PASSWORD=${REDIS_PASSWORD}
+   networks:
+     - web
+   ports:
+     - 6379:6379
+   volumes:
+     - ${VOLUME_PATH}/redis/:/data
 
-  # commander:
-  #   container_name: redis_commander
-  #   image: rediscommander/redis-commander:latest
-  #   restart: always
-  #   environment:
-  #     - REDIS_HOST=redis
-  #     - REDIS_PASSWORD=${REDIS_PASSWORD}
-  #   networks:
-  #     - redis
-  #   ports:
-  #     - 8081:8081
+  redis-commander:
+   container_name: redis-commander
+   image: rediscommander/redis-commander:latest
+   restart: always
+   environment:
+     - REDIS_HOST=redis
+     - REDIS_PASSWORD=${REDIS_PASSWORD}
+   depends_on:
+     - redis
+   networks:
+     - web
+#   ports:
+#     - 8081:8081
 
   # portainer:
   #   container_name: portainer
