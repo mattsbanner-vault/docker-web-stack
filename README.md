@@ -10,7 +10,7 @@ You will need the following software installed.
 
 ## Setup
 
-1. Clone this project, better yet, [fork it](https://github.com/mattsbanner/php-docker-config/fork) and save your changes.
+1. Clone this project. Better yet, [fork it](https://github.com/mattsbanner/php-docker-config/fork) to save your changes.
 ```shell script
 $ git clone git@github.com:mattsbanner/php-docker-config.git
 ```
