@@ -95,7 +95,6 @@ services:
      - web
    ports:
      - ${MAILHOG_PORT}:1025
-#     - 8025:8025
 
   mongo:
     image: mongo:4.2
@@ -125,8 +124,6 @@ services:
       - mongo
     networks:
       - web
-#    ports:
-#      - 8083:8081
 
   mysql:
    container_name: dev_mysql
@@ -154,8 +151,6 @@ services:
      - mysql
    external_links:
      - mysql:db
-  #     ports:
-  #       - '8082:80'
 
   redis:
    container_name: dev_redis
@@ -181,8 +176,6 @@ services:
      - redis
    networks:
      - web
-#   ports:
-#     - 8081:8081
 
   portainer:
    container_name: dev_portainer
@@ -190,8 +183,6 @@ services:
    restart: always
    networks:
      - web
-  #     ports:
-  #       - 9000:9000
    volumes:
      - ${VOLUME_PATH}/portainer/:/data
      - /var/run/docker.sock:/var/run/docker.sock
