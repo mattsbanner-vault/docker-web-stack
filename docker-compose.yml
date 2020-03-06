@@ -20,11 +20,10 @@ services:
       - portainer
     networks:
       - web
-      - php
     ports:
       - ${NGINX_PORT}:80
     volumes:
-      - ${SITES_PATH}:/var/www/
+      - ${SITES_PATH}:/var/www/html
       - ./resources/configs/nginx/admin:/etc/nginx/admin-sites/
       - ./resources/configs/nginx/sites:/etc/nginx/sites/
 
@@ -73,7 +72,7 @@ services:
     image: nanoninja/php-fpm:7.3.10
     restart: unless-stopped
     networks:
-      - php
+      - web
     volumes:
       #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
       - ${SITES_PATH}:/var/www/html
@@ -192,8 +191,4 @@ networks:
 
   web:
     name: web
-    driver: bridge
-
-  php:
-    name: php
     driver: bridge
