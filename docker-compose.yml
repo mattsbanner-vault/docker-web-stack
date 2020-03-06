@@ -16,6 +16,8 @@ services:
       - mongo-express
       - mailhog
       - redis-commander
+      - phpmyadmin
+      - portainer
     networks:
       - web
       - php
@@ -182,17 +184,17 @@ services:
 #   ports:
 #     - 8081:8081
 
-  # portainer:
-  #   container_name: dev_portainer
-  #   image: portainer/portainer:latest
-  #   restart: always
-  #   networks:
-  #     - portainer
-  #   ports:
-  #     - 9000:9000
-  #   volumes:
-  #     - ${VOLUME_PATH}/portainer/:/data
-  #     - /var/run/docker.sock:/var/run/docker.sock
+  portainer:
+   container_name: dev_portainer
+   image: portainer/portainer:latest
+   restart: always
+   networks:
+     - web
+  #     ports:
+  #       - 9000:9000
+   volumes:
+     - ${VOLUME_PATH}/portainer/:/data
+     - /var/run/docker.sock:/var/run/docker.sock
 
 networks:
 
