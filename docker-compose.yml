@@ -3,7 +3,7 @@ version: '3.5'
 services:
 
   nginx:
-    container_name: nginx
+    container_name: dev_nginx
     image: mattbanner/nginx:latest
     restart: unless-stopped
     depends_on:
@@ -23,10 +23,10 @@ services:
       - 8080:80
     volumes:
       - ${VOLUME_PATH}/sites/:/var/www/
-      - ./configs/nginx/:/etc/nginx/admin-sites/
+      - ./resources/configs/nginx/:/etc/nginx/admin-sites/
 
   # php56:
-  #   container_name: php-5.6
+  #   container_name: dev_php-5.6
   #   image: nanoninja/php-fpm:5.6
   #   restart: unless-stopped
   #   networks:
@@ -36,7 +36,7 @@ services:
   #     - ${VOLUME_PATH}/sites/:/web
 
   # php70:
-  #   container_name: php-7.0
+  #   container_name: dev_php-7.0
   #   image: nanoninja/php-fpm:7
   #   restart: unless-stopped
   #   networks:
@@ -46,7 +46,7 @@ services:
   #     - ${VOLUME_PATH}/sites/:/web
 
   # php71:
-  #   container_name: php-7.1
+  #   container_name: dev_php-7.1
   #   image: nanoninja/php-fpm:7.1
   #   restart: unless-stopped
   #   networks:
@@ -56,7 +56,7 @@ services:
   #     - ${VOLUME_PATH}/sites/:/web
 
   # php72:
-  #   container_name: php-7.2
+  #   container_name: dev_php-7.2
   #   image: nanoninja/php-fpm:7.2
   #   restart: unless-stopped
   #   networks:
@@ -66,7 +66,7 @@ services:
   #     - ${VOLUME_PATH}/sites/:/web
 
   php73:
-    container_name: php-7.3
+    container_name: dev_php-7.3
     image: nanoninja/php-fpm:7.3.10
     restart: unless-stopped
     networks:
@@ -76,7 +76,7 @@ services:
       - ${VOLUME_PATH}/sites/:/web
 
   # php74:
-  #   container_name: php-7.4
+  #   container_name: dev_php-7.4
   #   image: nanoninja/php-fpm:7.4
   #   restart: unless-stopped
   #   networks:
@@ -86,7 +86,7 @@ services:
   #     - ${VOLUME_PATH}/sites/:/web
 
   mailhog:
-   container_name: mailhog
+   container_name: dev_mailhog
    image: mailhog/mailhog:latest
    restart: always
    networks:
@@ -97,7 +97,7 @@ services:
 
   mongo:
     image: mongo:4.2
-    container_name: mongo
+    container_name: dev_mongo
     restart: unless-stopped
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
@@ -111,7 +111,7 @@ services:
 
   mongo-express:
     image: mongo-express:0.54
-    container_name: mongo-express
+    container_name: dev_mongo-express
     restart: unless-stopped
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_USER}
@@ -126,7 +126,7 @@ services:
 #      - 8083:8081
 
   # mysql:
-  #   container_name: mysql
+  #   container_name: dev_mysql
   #   image: mysql:${MYSQL_VERSION}
   #   restart: always
   #   environment:
@@ -142,7 +142,7 @@ services:
   #     - ${VOLUME_PATH}/mysql/:/var/lib/mysql/
 
   # phpmyadmin:
-  #   container_name: phpmyadmin
+  #   container_name: dev_phpmyadmin
   #   image: phpmyadmin/phpmyadmin:5.0.1
   #   restart: always
   #   networks:
@@ -155,7 +155,7 @@ services:
   #     - '8082:80'
 
   redis:
-   container_name: redis
+   container_name: dev_redis
    image: bitnami/redis:5.0.6
    restart: always
    environment:
@@ -168,7 +168,7 @@ services:
      - ${VOLUME_PATH}/redis/:/data
 
   redis-commander:
-   container_name: redis-commander
+   container_name: dev_redis-commander
    image: rediscommander/redis-commander:latest
    restart: always
    environment:
@@ -182,7 +182,7 @@ services:
 #     - 8081:8081
 
   # portainer:
-  #   container_name: portainer
+  #   container_name: dev_portainer
   #   image: portainer/portainer:latest
   #   restart: always
   #   networks:
