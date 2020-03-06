@@ -3,7 +3,7 @@ version: '3.5'
 services:
 
   nginx:
-    container_name: dev_nginx
+    container_name: ${CONTAINER_NAME_PREFIX}nginx
     image: mattbanner/nginx:latest
     restart: unless-stopped
     depends_on:
@@ -28,7 +28,7 @@ services:
       - ./resources/configs/nginx/sites:/etc/nginx/sites/
 
   # php56:
-  #   container_name: dev_php-5.6
+  #   container_name: ${CONTAINER_NAME_PREFIX}php-5.6
   #   image: nanoninja/php-fpm:5.6
   #   restart: unless-stopped
   #   networks:
@@ -38,7 +38,7 @@ services:
   #     - ${VOLUME_PATH}/sites/:/web
 
   # php70:
-  #   container_name: dev_php-7.0
+  #   container_name: ${CONTAINER_NAME_PREFIX}php-7.0
   #   image: nanoninja/php-fpm:7
   #   restart: unless-stopped
   #   networks:
@@ -48,7 +48,7 @@ services:
   #     - ${VOLUME_PATH}/sites/:/web
 
   # php71:
-  #   container_name: dev_php-7.1
+  #   container_name: ${CONTAINER_NAME_PREFIX}php-7.1
   #   image: nanoninja/php-fpm:7.1
   #   restart: unless-stopped
   #   networks:
@@ -58,7 +58,7 @@ services:
   #     - ${VOLUME_PATH}/sites/:/web
 
   # php72:
-  #   container_name: dev_php-7.2
+  #   container_name: ${CONTAINER_NAME_PREFIX}php-7.2
   #   image: nanoninja/php-fpm:7.2
   #   restart: unless-stopped
   #   networks:
@@ -68,7 +68,7 @@ services:
   #     - ${VOLUME_PATH}/sites/:/web
 
   php73:
-    container_name: dev_php-7.3
+    container_name: ${CONTAINER_NAME_PREFIX}php-7.3
     image: nanoninja/php-fpm:7.3.10
     restart: unless-stopped
     networks:
@@ -78,7 +78,7 @@ services:
       - ${SITES_PATH}:/var/www/html
 
   # php74:
-  #   container_name: dev_php-7.4
+  #   container_name: ${CONTAINER_NAME_PREFIX}php-7.4
   #   image: nanoninja/php-fpm:7.4
   #   restart: unless-stopped
   #   networks:
@@ -88,7 +88,7 @@ services:
   #     - ${VOLUME_PATH}/sites/:/web
 
   mailhog:
-   container_name: dev_mailhog
+   container_name: ${CONTAINER_NAME_PREFIX}mailhog
    image: mailhog/mailhog:latest
    restart: always
    networks:
@@ -99,7 +99,7 @@ services:
   mongo:
     image: mongo:4.2
     command: mongod --auth
-    container_name: dev_mongo
+    container_name: ${CONTAINER_NAME_PREFIX}mongo
     restart: unless-stopped
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
@@ -113,7 +113,7 @@ services:
 
   mongo-express:
     image: mongo-express:0.54
-    container_name: dev_mongo-express
+    container_name: ${CONTAINER_NAME_PREFIX}mongo-express
     restart: unless-stopped
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=${MONGO_USER}
@@ -126,7 +126,7 @@ services:
       - web
 
   mysql:
-   container_name: dev_mysql
+   container_name: ${CONTAINER_NAME_PREFIX}mysql
    image: mysql:${MYSQL_VERSION}
    restart: always
    environment:
@@ -142,7 +142,7 @@ services:
      - ${VOLUME_PATH}/mysql/:/var/lib/mysql/
 
   phpmyadmin:
-   container_name: dev_phpmyadmin
+   container_name: ${CONTAINER_NAME_PREFIX}phpmyadmin
    image: phpmyadmin/phpmyadmin:5.0.1
    restart: always
    networks:
@@ -153,7 +153,7 @@ services:
      - mysql:db
 
   redis:
-   container_name: dev_redis
+   container_name: ${CONTAINER_NAME_PREFIX}redis
    image: bitnami/redis:5.0.6
    restart: always
    environment:
@@ -166,7 +166,7 @@ services:
      - ${VOLUME_PATH}/redis/:/data
 
   redis-commander:
-   container_name: dev_redis-commander
+   container_name: ${CONTAINER_NAME_PREFIX}redis-commander
    image: rediscommander/redis-commander:latest
    restart: always
    environment:
@@ -178,7 +178,7 @@ services:
      - web
 
   portainer:
-   container_name: dev_portainer
+   container_name: ${CONTAINER_NAME_PREFIX}portainer
    image: portainer/portainer:latest
    restart: always
    networks:
