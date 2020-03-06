@@ -3,29 +3,29 @@
 
 > A full PHP development environment run within Docker. Includes NGINX, PHP 5.6, 7.0, 7.1, 7.2, 7.3 & 7.4, MySQL with a replication instance, PHPMyAdmin, MongoDB, Mongo Express, Redis, Redis Commander, Mailhog and Portainer to monitor the whole shebang.
 
-## To Do
-Here you can see what I'm working on.
-- [ ] Setup MySQL Replication, this is working in the mysql-replication directory, just need to combine this and the existing MySQL stack
-- [ ] Write the NGINX configs to reverse proxy each of the services, their ports can then be closed
-- [ ] Implement each version of PHP to the NGINX config and allow to specify PHP version in hostname
-- [ ] Very basic site at http://stack.dev.localhost with shortcuts to each of the stack web UI's.
+## Prerequisites
+You will need the following software installed.
+- Docker
+- Docker Compose
 
-## Ideas
-Ideally, the user should only have to add the wildcard of `*.dev.localhost` to their hosts file. The stack can then be used with the following.
+## Setup
 
-- Redis Commander - http://redis-commander.stack.dev.localhost
-- PHPMyAdmin - http://phpmyadmin.stack.dev.localhost
-- Mongo Express - http://mongo-express.stack.dev.localhost
-- Mailhog - http://mailhog.stack.dev.localhost
-- Portainer - http://portainer.stack.dev.localhost
+1. Clone this project, better yet, [fork it](https://github.com/mattsbanner/php-docker-config/fork) and save your changes.
+```shell script
+$ git clone git@github.com:mattsbanner/php-docker-config.git
+```
 
-Default PHP sites can then be accessed with http://site-folder-name.dev.localhost
+2. Create your environment file by copying _.env.example_ to _.env_.
+```shell script
+$ cd php-docker-config
+$ cp .env.example .env
+```
 
-Specific PHP sites can be targetted with
-- http://site-folder-name.php56.dev.localhost
-- http://site-folder-name.php70.dev.localhost
-- http://site-folder-name.php71.dev.localhost
-- http://site-folder-name.php72.dev.localhost
-- http://site-folder-name.php73.dev.localhost
-- http://site-folder-name.php74.dev.localhost
+3. Go through the _.env_ file and replace the placeholders (e.g _%%PLACEHOLDER_EXAMPLE%%_) / port numbers with your desired configuration.
 
+4. Use Docker Compose to bring up the project. This may take a while to clone the images on the first occasion.
+```shell script
+$ docker-compose up -d
+```
+
+**That's it!**
