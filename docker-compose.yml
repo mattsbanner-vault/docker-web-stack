@@ -27,49 +27,29 @@ services:
       - ./resources/configs/nginx/admin:/etc/nginx/admin-sites/
       - ./resources/configs/nginx/sites:/etc/nginx/sites/
 
-  # php56:
-  #   container_name: ${CONTAINER_NAME_PREFIX}php-5.6
-  #   image: nanoninja/php-fpm:5.6
-  #   restart: unless-stopped
-  #   networks:
-  #     - php
-  #   volumes:
-  #     #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-  #     - ${VOLUME_PATH}/sites/:/web
+  php56:
+   container_name: ${CONTAINER_NAME_PREFIX}php-5.6
+   image: nanoninja/php-fpm:5.6.40
+   restart: unless-stopped
+   networks:
+     - web
+   volumes:
+     #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+     - ${SITES_PATH}:/var/www/html
 
-  # php70:
-  #   container_name: ${CONTAINER_NAME_PREFIX}php-7.0
-  #   image: nanoninja/php-fpm:7
-  #   restart: unless-stopped
-  #   networks:
-  #     - php
-  #   volumes:
-  #     #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-  #     - ${VOLUME_PATH}/sites/:/web
+#  php70:
+#    container_name: ${CONTAINER_NAME_PREFIX}php-7.1
+#    image: nanoninja/php-fpm:7.1.14
+#    restart: unless-stopped
+#    networks:
+#      - web
+#    volumes:
+#      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+#      - ${SITES_PATH}:/var/www/html
 
-  # php71:
-  #   container_name: ${CONTAINER_NAME_PREFIX}php-7.1
-  #   image: nanoninja/php-fpm:7.1
-  #   restart: unless-stopped
-  #   networks:
-  #     - php
-  #   volumes:
-  #     #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-  #     - ${VOLUME_PATH}/sites/:/web
-
-  # php72:
-  #   container_name: ${CONTAINER_NAME_PREFIX}php-7.2
-  #   image: nanoninja/php-fpm:7.2
-  #   restart: unless-stopped
-  #   networks:
-  #     - php
-  #   volumes:
-  #     #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-  #     - ${VOLUME_PATH}/sites/:/web
-
-  php73:
-    container_name: ${CONTAINER_NAME_PREFIX}php-7.3
-    image: nanoninja/php-fpm:7.3.10
+  php71:
+    container_name: ${CONTAINER_NAME_PREFIX}php-7.1
+    image: nanoninja/php-fpm:7.1.14
     restart: unless-stopped
     networks:
       - web
@@ -77,15 +57,35 @@ services:
       #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
       - ${SITES_PATH}:/var/www/html
 
-  # php74:
-  #   container_name: ${CONTAINER_NAME_PREFIX}php-7.4
-  #   image: nanoninja/php-fpm:7.4
-  #   restart: unless-stopped
-  #   networks:
-  #     - php
-  #   volumes:
-  #     #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
-  #     - ${VOLUME_PATH}/sites/:/web
+  php72:
+    container_name: ${CONTAINER_NAME_PREFIX}php-7.2
+    image: nanoninja/php-fpm:7.2.15
+    restart: unless-stopped
+    networks:
+      - web
+    volumes:
+      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+      - ${SITES_PATH}:/var/www/html
+
+  php73:
+    container_name: ${CONTAINER_NAME_PREFIX}php-7.3
+    image: nanoninja/php-fpm:7.3.9
+    restart: unless-stopped
+    networks:
+      - web
+    volumes:
+      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+      - ${SITES_PATH}:/var/www/html
+
+  php74:
+    container_name: ${CONTAINER_NAME_PREFIX}php-7.4
+    image: nanoninja/php-fpm:7.4.0
+    restart: unless-stopped
+    networks:
+      - web
+    volumes:
+      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+      - ${SITES_PATH}:/var/www/html
 
   mailhog:
    container_name: ${CONTAINER_NAME_PREFIX}mailhog
