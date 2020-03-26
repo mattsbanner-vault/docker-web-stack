@@ -7,12 +7,12 @@ services:
     image: mattbanner/nginx:latest
     restart: unless-stopped
     depends_on:
-      # - php56
+      - php56
       # - php70
-      # - php71
-      # - php72
+      - php71
+      - php72
       - php73
-      # - php74
+      - php74
       - mongo-express
       - mailhog
       - redis-commander
