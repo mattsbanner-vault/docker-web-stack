@@ -34,7 +34,6 @@ services:
    networks:
      - web
    volumes:
-     #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
      - ${SITES_PATH}:/var/www/html
 
 #  php70:
@@ -44,7 +43,6 @@ services:
 #    networks:
 #      - web
 #    volumes:
-#      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
 #      - ${SITES_PATH}:/var/www/html
 
   php71:
@@ -54,7 +52,6 @@ services:
     networks:
       - web
     volumes:
-      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
       - ${SITES_PATH}:/var/www/html
 
   php72:
@@ -64,7 +61,6 @@ services:
     networks:
       - web
     volumes:
-      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
       - ${SITES_PATH}:/var/www/html
 
   php73:
@@ -74,7 +70,6 @@ services:
     networks:
       - web
     volumes:
-      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
       - ${SITES_PATH}:/var/www/html
 
   php74:
@@ -84,7 +79,6 @@ services:
     networks:
       - web
     volumes:
-      #      - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
       - ${SITES_PATH}:/var/www/html
 
   mailhog:
@@ -187,16 +181,15 @@ services:
       - ${VOLUME_PATH}/portainer/:/data
       - /var/run/docker.sock:/var/run/docker.sock
 
-  elastic-search:
-    container_name: ${CONTAINER_NAME_PREFIX}elastic-search
+  elasticsearch:
+    container_name: ${CONTAINER_NAME_PREFIX}elasticsearch
     image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
     restart: unless-stopped
     command: [ "bin/elasticsearch", "-Expack.security.enabled=false", "-Ediscovery.type=single-node" ]
     networks:
       - web
     ports:
-      - 9200:9200
-      - 9300:9300
+      - ${ELASTICSEARCH_PORT}:9200
 
 networks:
 
