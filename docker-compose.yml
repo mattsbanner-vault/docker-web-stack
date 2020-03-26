@@ -126,66 +126,77 @@ services:
       - web
 
   mysql:
-   container_name: ${CONTAINER_NAME_PREFIX}mysql
-   image: mysql:${MYSQL_VERSION}
-   restart: always
-   environment:
-     - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-     - MYSQL_USER=${MYSQL_USER}
-     - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-     - MYSQL_DATABASE=example
-   networks:
-     - web
-   ports:
-     - ${MYSQL_PORT}:3306
-   volumes:
-     - ${VOLUME_PATH}/mysql/:/var/lib/mysql/
+    container_name: ${CONTAINER_NAME_PREFIX}mysql
+    image: mysql:${MYSQL_VERSION}
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_DATABASE=example
+    networks:
+      - web
+    ports:
+      - ${MYSQL_PORT}:3306
+    volumes:
+      - ${VOLUME_PATH}/mysql/:/var/lib/mysql/
 
   phpmyadmin:
-   container_name: ${CONTAINER_NAME_PREFIX}phpmyadmin
-   image: phpmyadmin/phpmyadmin:5.0.1
-   restart: always
-   networks:
-     - web
-   depends_on:
-     - mysql
-   external_links:
-     - mysql:db
+    container_name: ${CONTAINER_NAME_PREFIX}phpmyadmin
+    image: phpmyadmin/phpmyadmin:5.0.1
+    restart: always
+    networks:
+      - web
+    depends_on:
+      - mysql
+    external_links:
+      - mysql:db
 
   redis:
-   container_name: ${CONTAINER_NAME_PREFIX}redis
-   image: bitnami/redis:5.0.6
-   restart: always
-   environment:
-     - REDIS_PASSWORD=${REDIS_PASSWORD}
-   networks:
-     - web
-   ports:
-     - ${REDIS_PORT}:6379
-   volumes:
-     - ${VOLUME_PATH}/redis/:/data
+    container_name: ${CONTAINER_NAME_PREFIX}redis
+    image: bitnami/redis:5.0.6
+    restart: always
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    networks:
+      - web
+    ports:
+      - ${REDIS_PORT}:6379
+    volumes:
+      - ${VOLUME_PATH}/redis/:/data
 
   redis-commander:
-   container_name: ${CONTAINER_NAME_PREFIX}redis-commander
-   image: rediscommander/redis-commander:latest
-   restart: always
-   environment:
-     - REDIS_HOST=redis
-     - REDIS_PASSWORD=${REDIS_PASSWORD}
-   depends_on:
-     - redis
-   networks:
-     - web
+    container_name: ${CONTAINER_NAME_PREFIX}redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    depends_on:
+      - redis
+    networks:
+      - web
 
   portainer:
-   container_name: ${CONTAINER_NAME_PREFIX}portainer
-   image: portainer/portainer:latest
-   restart: always
-   networks:
-     - web
-   volumes:
-     - ${VOLUME_PATH}/portainer/:/data
-     - /var/run/docker.sock:/var/run/docker.sock
+    container_name: ${CONTAINER_NAME_PREFIX}portainer
+    image: portainer/portainer:latest
+    restart: always
+    networks:
+      - web
+    volumes:
+      - ${VOLUME_PATH}/portainer/:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  elastic-search:
+    container_name: ${CONTAINER_NAME_PREFIX}elastic-search
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+    restart: unless-stopped
+    command: [ "bin/elasticsearch", "-Expack.security.enabled=false", "-Ediscovery.type=single-node" ]
+    networks:
+      - web
+    ports:
+      - 9200:9200
+      - 9300:9300
 
 networks:
 
