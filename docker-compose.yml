@@ -18,7 +18,7 @@ services:
       - redis-commander
       - phpmyadmin
       - portainer
-      - elasticsearch
+      - kibana
     networks:
       - web
     ports:
@@ -197,6 +197,8 @@ services:
   kibana:
     container_name: ${CONTAINER_NAME_PREFIX}kibana
     image: docker.elastic.co/kibana/kibana:7.6.2
+    depends_on: 
+      - elasticsearch
     environment:
       ELASTICSEARCH_URL: http://elasticsearch:9200
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
