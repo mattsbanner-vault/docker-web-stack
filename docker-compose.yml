@@ -187,10 +187,21 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
     restart: unless-stopped
     command: [ "bin/elasticsearch", "-Expack.security.enabled=false", "-Ediscovery.type=single-node" ]
+    volumes:
+      - ${VOLUME_PATH}/elasticsearch:/usr/share/elasticsearch/data
     networks:
       - web
     ports:
       - ${ELASTICSEARCH_PORT}:9200
+
+  kibana:
+    container_name: ${CONTAINER_NAME_PREFIX}kibana
+    image: docker.elastic.co/kibana/kibana:7.6.2
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    networks:
+      - web
 
 networks:
 
