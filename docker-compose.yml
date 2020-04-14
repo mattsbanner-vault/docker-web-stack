@@ -176,6 +176,8 @@ services:
     container_name: ${CONTAINER_NAME_PREFIX}portainer
     image: portainer/portainer:latest
     restart: always
+    ports:
+      - 9000:9000
     networks:
       - web
     volumes:
