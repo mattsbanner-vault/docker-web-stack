@@ -8,6 +8,8 @@ You will need the following software installed.
 - Docker
 - Docker Compose
 
+dnsmasq needs to be setup and resolving *.localhost to your machine.
+
 ## Setup
 
 1. Clone this project. Better yet, [fork it](https://github.com/mattsbanner/php-docker-config/fork) to save your changes.
