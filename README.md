@@ -1,18 +1,15 @@
 # Docker Based PHP Development Environment
-**This project is a WIP. There is currently no stable functionality.**
 
-> A full PHP development environment run within Docker. Includes NGINX, PHP 5.6, 7.0, 7.1, 7.2, 7.3 & 7.4, MySQL, PHPMyAdmin, MongoDB, Mongo Express, Redis, Redis Commander, Mailhog and Portainer to monitor the whole shebang.
+> Includes MySQL, PHPMyAdmin, MongoDB, Mongo Express, Redis, Redis Commander, Mailhog and Portainer to monitor the whole shebang.
 
 ## Prerequisites
 You will need the following software installed.
 - Docker
 - Docker Compose
 
-dnsmasq needs to be setup and resolving *.localhost to your machine.
-
 ## Setup
 
-1. Clone this project. Better yet, [fork it](https://github.com/mattsbanner/php-docker-config/fork) to save your changes.
+1. Clone this project.
 ```shell script
 $ git clone git@github.com:mattsbanner/php-docker-config.git
 ```
@@ -23,7 +20,7 @@ $ cd php-docker-config
 $ cp .env.example .env
 ```
 
-3. Go through the _.env_ file and replace the placeholders (e.g _%%PLACEHOLDER_EXAMPLE%%_) / port numbers with your desired configuration.
+3. Go through the _.env_ file and replace the variable placeholders (e.g _%%PLACEHOLDER_EXAMPLE%%_) with your desired configuration.
 
 4. Use Docker Compose to bring up the project. This may take a while to clone the images on the first occasion.
 ```shell script
