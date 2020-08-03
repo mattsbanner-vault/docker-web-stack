@@ -1,6 +1,8 @@
 # Docker Web Stack
 
-Consists of:
+> A pre-defined Docker stack for running common services alongside your NGINX / Apache and PHP stack.
+
+This Docker stack consists of.
 - Elasticsearch
 - Kibana
 - Mailhog
@@ -12,8 +14,10 @@ Consists of:
 - Redis
 - Redis Commander
 
+**Please create an [issue](https://github.com/mattsbanner/docker-web-stack/issues/new) or [pull request](https://github.com/mattsbanner/docker-web-stack/compare) if there are any additional services you wish to be added.**
+
 ## Prerequisites
-You will need the following software installed.
+You will need the following software.
 - Docker
 - Docker Compose
 
@@ -21,12 +25,12 @@ You will need the following software installed.
 
 1. Clone this project.
 ```shell script
-$ git clone git@github.com:mattsbanner/php-docker-config.git
+$ git clone git@github.com:mattsbanner/docker-web-stack.git
 ```
 
 2. Create your environment file by copying _.env.example_ to _.env_.
 ```shell script
-$ cd php-docker-config
+$ cd docker-web-stack/src
 $ cp .env.example .env
 ```
 
@@ -36,5 +40,3 @@ $ cp .env.example .env
 ```shell script
 $ docker-compose up -d
 ```
-
-**That's it!**
