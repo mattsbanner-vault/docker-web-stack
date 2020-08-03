@@ -1,6 +1,16 @@
-# Docker Based PHP Development Environment
+# Docker Web Stack
 
-> Includes MySQL, PHPMyAdmin, MongoDB, Mongo Express, Redis, Redis Commander, Mailhog and Portainer to monitor the whole shebang.
+Consists of:
+- Elasticsearch
+- Kibana
+- Mailhog
+- MongoDB
+- Mongo Express
+- MySQL
+- PHPMyAdmin
+- Portainer
+- Redis
+- Redis Commander
 
 ## Prerequisites
 You will need the following software installed.
