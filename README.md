@@ -30,11 +30,11 @@ $ git clone git@github.com:mattsbanner/docker-web-stack.git
 
 2. Create your environment file by copying _.env.example_ to _.env_.
 ```shell script
-$ cd docker-web-stack/src
+$ cd docker-web-stack
 $ cp .env.example .env
 ```
 
-3. Go through the _.env_ file and replace the variable placeholders (e.g _%%PLACEHOLDER_EXAMPLE%%_) with your desired configuration.
+3. Go through the _.env_ file and set the variables you wish to change.
 
 4. Use Docker Compose to bring up the project. This may take a while to clone the images on the first occasion.
 ```shell script
