@@ -122,15 +122,28 @@ services:
     volumes:
       - ${VOLUME_PATH}/redis/:/data
 
+  redis_secondary:
+    container_name: ${STACK_PREFIX}redis_secondary
+    image: bitnami/redis:${REDIS_SECONDARY_VERSION}
+    restart: unless-stopped
+    environment:
+      - REDIS_PASSWORD=${REDIS_SECONDARY_PASSWORD}
+    networks:
+      - web
+    ports:
+      - ${REDIS_SECONDARY_PORT}:6379
+    volumes:
+      - ${VOLUME_PATH}/redis-secondary/:/data
+
   redis-commander:
     container_name: ${STACK_PREFIX}redis-commander
     image: rediscommander/redis-commander:${REDIS_COMMANDER_VERSION}
     restart: unless-stopped
     depends_on:
       - redis
+      - redis_secondary
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_HOSTS=redis:redis:6379:0:${REDIS_PASSWORD},redis_secondary:redis_secondary:6379:0:${REDIS_SECONDARY_PASSWORD}
     ports:
       - ${REDIS_COMMANDER_PORT}:8081
     networks:
