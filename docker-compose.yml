@@ -122,30 +122,45 @@ services:
     volumes:
       - ${VOLUME_PATH}/redis/:/data
 
-  redis_secondary:
-    container_name: ${STACK_PREFIX}redis_secondary
-    image: bitnami/redis:${REDIS_SECONDARY_VERSION}
-    restart: unless-stopped
-    environment:
-      - REDIS_PASSWORD=${REDIS_SECONDARY_PASSWORD}
-    networks:
-      - web
-    ports:
-      - ${REDIS_SECONDARY_PORT}:6379
-    volumes:
-      - ${VOLUME_PATH}/redis-secondary/:/data
-
   redis-commander:
     container_name: ${STACK_PREFIX}redis-commander
     image: rediscommander/redis-commander:${REDIS_COMMANDER_VERSION}
     restart: unless-stopped
     depends_on:
       - redis
-      - redis_secondary
     environment:
-      - REDIS_HOSTS=redis:redis:6379:0:${REDIS_PASSWORD},redis_secondary:redis_secondary:6379:0:${REDIS_SECONDARY_PASSWORD}
+      - REDIS_HOSTS=redis:redis:6379:0:${REDIS_PASSWORD}
     ports:
       - ${REDIS_COMMANDER_PORT}:8081
+    networks:
+      - web
+
+  dynamodb:
+    container_name: ${STACK_PREFIX}dynamodb
+    image: amazon/dynamodb-local:${DYNAMODB_VERSION}
+    restart: unless-stopped
+    ports:
+      - ${DYNAMODB_PORT}:8000
+    volumes:
+      - ${VOLUME_PATH}/dynamodb/:/home/dynamodblocal/data
+    working_dir: /home/dynamodblocal
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/"
+    networks:
+      - web
+
+  dynamodb-admin:
+    container_name: ${STACK_PREFIX}dynamodb-admin
+    image: aaronshaf/dynamodb-admin:${DYNAMODB_ADMIN_VERSION}
+    restart: unless-stopped
+    depends_on:
+      - dynamodb
+    ports:
+      - ${DYNAMODB_ADMIN_PORT}:8001
+    environment:
+      DYNAMO_ENDPOINT: http://dynamodb:8000
+      AWS_REGION: local
+      AWS_ACCESS_KEY_ID: local
+      AWS_SECRET_ACCESS_KEY: local
     networks:
       - web
 
